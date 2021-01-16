@@ -16,7 +16,9 @@ Success page and people who have similar classes returned
 
 Locally :
 
-Run npm install on download
+Run npm install after download
 
 
 Run nodemon app.js
+
+server runs on localhost:3000
