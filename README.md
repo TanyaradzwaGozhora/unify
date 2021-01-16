@@ -11,3 +11,12 @@ Create profile option and page
 Basic info, nickname
 Classes page (submit your classes)
 Success page and people who have similar classes returned
+
+
+
+Locally :
+
+Run npm install on download
+
+
+Run nodemon app.js
