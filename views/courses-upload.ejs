@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Courses</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <form action="/" class="form-signin" method="POST">
+        <img src="https://edexec.co.uk/wp-content/uploads/2020/01/iStock-1130620580-678x381.jpg" width="700" height="300">
+        <h1 class="h3 mb-3 font-weight-normal">Courses</h1>
+
+    </form>
+
+
+    <div class="row" id="addRowsHere">
+        <div class="col-md-8 justify-content-center">
+            <div class="form-group label-floating">
+                <label class="control-label">Course</label>
+                <input type="text" class="form-control" v-model="act">
+            </div>
+        </div>
+        <div class="col-md-8 justify-content-center">
+            <div class="form-group label-floating ">
+                <label class="control-label">Course </label>
+                <input type="text" class="form-control" v-model="section">
+            </div>
+        </div>
+    </div>
+    <button id="clickMe">Add row</button>
+
+
+    <script>
+        document.getElementById("clickMe").onclick = function() {
+            //first div
+            var newDivCol = document.createElement("div");
+            newDivCol.setAttribute("class", "col-md-8");
+            //second div
+            var newDivForm = document.createElement("div");
+            newDivForm.setAttribute("class", "form-group label-floating");
+            newDivCol.appendChild(newDivForm);
+
+            //label
+            var newlabel = document.createElement("label");
+            newlabel.setAttribute("class", "control-label");
+            newlabel.innerHTML = "Course";
+            newDivForm.appendChild(newlabel);
+
+            //input
+            var newInput = document.createElement("input");
+            newInput.setAttribute("type", "text");
+            newInput.setAttribute("class", "form-control");
+            newInput.setAttribute("v-model", "act");
+            newDivForm.appendChild(newInput);
+
+            var element = document.getElementById("addRowsHere");
+            element.appendChild(newDivCol);
+        };
+    </script>
+
+
+    <form action="/" class="form-signin" method="POST"></form>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
+    </form>
+
+</body>
+
+</html>
