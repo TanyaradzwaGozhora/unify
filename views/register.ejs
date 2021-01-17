@@ -7,34 +7,39 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Create Profile</title>
+	<title>HackED 2021</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Bootstrap core CSS -->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="css/styles.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/homeStyle.css">
 </head>
+<body style="background-color: #212121">
+	<div class="topnav">
+  		<a href="\Users\david\OneDrive\Documents\HackED\home.html">Home</a>
+  		<a class="active" href="\Users\david\OneDrive\Documents\HackED\register.html">Register</a>
+  		<a href="\Users\david\OneDrive\Documents\HackED\classes.html">Classes</a>
+  		<a href="#success">Results</a>
+		<b href="#domain">Unify</b>
+	</div>
+	<div class="banner" style="height: 200px">
+		<a>Create your profile.</a>
+    </div>
+    <div style="padding: 15px;"></div>
+    <div class="container">
+        <div class="row clearfix">
+    <div class="col-md-12 col-md-offset-3 column"></div>
+        <form action="/register" class="form-signin" method="POST" class="personForm">
+            <input type="text" name="fname" class="form-control top" placeholder="First Name" required autofocus>
+            <input type="text" name="lname" class="form-control middle" placeholder="Last Name" required>
+            <input type="text" name="lname" class="form-control middle" placeholder="Faculty" required>
 
-<body class="text-center col-md-8 col-lg-8">
-    <form action="/register" class="form-signin" method="POST">
-        <img src="https://edexec.co.uk/wp-content/uploads/2020/01/iStock-1130620580-678x381.jpg" width="700" height="300">
-        <h1 class="h3 mb-3 font-weight-normal">Profile</h1>
-
-        <input type="text" name="fname" class="form-control top" placeholder="First Name" required autofocus>
-        <input type="text" name="lname" class="form-control middle" placeholder="Last Name" required>
-        <input type="text" name="lname" class="form-control middle" placeholder="Faculty" required>
-
-        <input type="text" name="major" class="form-control middle" placeholder="Major" required>
-        <input type="email" name="email" id="inputEmail" class="form-control bottom" placeholder="Email address" required>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-        <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
-    </form>
-
+            <input type="text" name="major" class="form-control middle" placeholder="Major" required>
+            <input type="email" name="email" id="inputEmail" class="form-control bottom" placeholder="Email address" required>
+            <a href="/Users/abeeramir/Desktop/HackED/coursesUpload.html" class="btn btn-lg btn-warning btn-block" role="button" aria-pressed="true">Sign Up</a>
+            <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
+        </form>
+</div> </div> </div> 
+    </body>
 </body>
-
 </html>
