@@ -11,6 +11,11 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 
 const app = express();
+var picture ="";
+var courses = [];
+var currentUser ={};
+
+
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -27,14 +32,18 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/unify", {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 
+//pname = preferred name
 const userSchema = new mongoose.Schema ({
-  email: String,
-  password: String,
+  username: String,
   googleId: String,
-  secret: String
+  courses: Array,
+  preferredName: String,
+  discordName: String,
+  Faculty: String,
+  Major: String
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -60,48 +69,69 @@ passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     //can be change later to google/unify
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: "http://localhost:3000/auth/google/unify",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
-
+    picture = profile.photos[0].value;
+    currentUser = profile;
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
 ));
 
-app.get("/", function(req, res){
-  res.render("homePage");
+app.get("/", isLoggedIn, function(req, res){
+  res.render("homePage", {imageURL: picture});
 });
 
 app.get("/auth/google",
   passport.authenticate('google', { scope: ["profile"] })
 );
 
-app.get("/auth/google/secrets",
+app.get("/auth/google/unify",
   passport.authenticate('google', { failureRedirect: "/login" }),
   function(req, res) {
     // Successful authentication, redirect to secrets.
-    res.redirect("/secrets");
+    res.redirect("/");
   });
 
-app.get("/login", function(req, res){
+app.get("/login", isLoggedIn,function(req, res){
   res.render("login");
 });
 
-app.get("/register", function(req, res){
+app.get("/register", isLoggedIn,function(req, res){
   res.render("register");
 });
 
-app.get("/secrets", function(req, res){
-  User.find({"secret": {$ne: null}}, function(err, foundUsers){
+
+app.get("/signIn", function(req,res){
+  res.render("signIn");
+});
+
+app.get("/courses", isLoggedIn, function (req, res) {
+  res.render("coursesUpload");
+});
+
+
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+app.get("/success", isLoggedIn, function(req, res){
+  User.findOne({ googleId: currentUser.id }, function(err, foundUser){
     if (err){
       console.log(err);
     } else {
-      if (foundUsers) {
-        res.render("secrets", {usersWithSecrets: foundUsers});
+      if (foundUser) {
+        if (foundUser.courses.length === 0) {
+          res.render("success", {results: 'You need to submit classes'});
+        } else {
+        res.render("success", {results: 'Congrats here are your matches'});
+        }
       }
     }
   });
@@ -140,34 +170,16 @@ app.get("/logout", function(req, res){
   res.redirect("/");
 });
 
+//evaluate usefulness
 app.post("/register", function(req, res){
 
-  User.register({username: req.body.username}, req.body.password, function(err, user){
+  User.register({username: req.body.discord}, req.body.pname, function(err, user){
     if (err) {
       console.log(err);
       res.redirect("/register");
     } else {
       passport.authenticate("local")(req, res, function(){
-        res.redirect("/secrets");
-      });
-    }
-  });
-
-});
-
-app.post("/login", function(req, res){
-
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
-
-  req.login(user, function(err){
-    if (err) {
-      console.log(err);
-    } else {
-      passport.authenticate("local")(req, res, function(){
-        res.redirect("/secrets");
+        res.redirect("/");
       });
     }
   });
@@ -175,7 +187,54 @@ app.post("/login", function(req, res){
 });
 
 
+// app.post("/login", function(req, res){
+//
+//   const user = new User({
+//     preferredName: req.body.preferred,
+//     discordName: req.body.discord
+//   });
+//
+//   req.login(user, function(err){
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       passport.authenticate("local")(req, res, function(){
+//         res.redirect("/secrets");
+//       });
+//     }
+//   });
+//
+// });
 
+app.post("/calculate", function(req, res){
+  //add each element in courses (all integers)
+  let chosenCourses = [];
+  var data = req.body;
+  console.log(data);
+  for( let prop in data ){
+    if(!(isNaN(parseInt(prop)))){
+      chosenCourses.push(data[prop]);
+    }
+  }
+
+  var newvalues = {$set: {preferredName: req.body.pname, discordName:req.body.discord, courses: chosenCourses} };
+  User.updateOne({ googleId: currentUser.id }, newvalues, function(err, foundUser){
+    console.log(foundUser.discordName);
+  });
+  //matches(courses)
+  res.redirect("/success");
+});
+
+function matches(courses){
+  //algorithm goes here
+}
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/signIn");
+}
 
 
 

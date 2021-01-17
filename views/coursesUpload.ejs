@@ -16,32 +16,80 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-
-
-    </style>
     <!-- Custom styles for this template -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
+<script>
+    var count_of_courses = 3;
+</script>
 
 <body class="text-center">
-    <form action="/" class="form-signin" method="POST">
+    <form action="/calculate" class="form-signin" method="POST">
         <img src="https://edexec.co.uk/wp-content/uploads/2020/01/iStock-1130620580-678x381.jpg" width="700" height="300">
-        <h1 class="h3 mb-3 font-weight-normal">Courses</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Courses and Contact details</h1>
 
-    </form>
+    <p>Enter your courses in the following format "CMPUT201" (without the "")</p>
+        <p>To get useful results you must enter at least two courses</p>
 
-
-    <div class="row" id="addRowsHere">
-        <div class="col-md-8 justify-content-center">
+        <div class="col-md-8">
             <div class="form-group label-floating">
-                <label class="control-label">Course</label>
-                <input type="text" class="form-control" v-model="act">
+
+                <label>
+                    Preferred Name
+                    <input name="pname" type="text" class="form-control" v-model="act" placeholder="Davie" required>
+                </label>
             </div>
         </div>
-        <div class="col-md-8 justify-content-center">
+
+        <div class="col-md-8">
+            <div class="form-group label-floating">
+
+                <label>
+                    Discord Username
+                    <input type=text" name="discord" class="form-control middle" placeholder="mamomoi#1230" required>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group label-floating">
+
+                <label>
+                    Faculty
+                    <input type="text" name="faculty" class="form-control middle" placeholder="Arts" required>
+                </label>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="form-group label-floating">
+
+                <label>
+                    Major
+                    <input type="text" name="major" class="form-control middle" placeholder="Economics" required>
+                </label>
+            </div>
+        </div>
+
+
+
+
+<hr/>
+    <div class="row" id="addRowsHere">
+        <div class="col-md-8">
+            <div class="form-group label-floating">
+
+                <label>
+                    Course
+                    <input name="1" type="text" class="form-control" placeholder="ECON101" v-model="act" required>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-8">
             <div class="form-group label-floating ">
-                <label class="control-label">Course </label>
-                <input type="text" class="form-control" v-model="section">
+                <label class="control-label">Course
+                <input name="2" type="text" class="form-control" placeholder="ECON101" v-model="section" required>
+                </label>
             </div>
         </div>
     </div>
@@ -65,11 +113,15 @@
             newDivForm.appendChild(newlabel);
 
             //input
+            var i = count_of_courses.toString();
+            count_of_courses +=1;
             var newInput = document.createElement("input");
             newInput.setAttribute("type", "text");
             newInput.setAttribute("class", "form-control");
             newInput.setAttribute("v-model", "act");
-            newDivForm.appendChild(newInput);
+            newInput.setAttribute("placeholder", "ECON101");
+            newInput.setAttribute("name", i);
+            newlabel.appendChild(newInput);
 
             var element = document.getElementById("addRowsHere");
             element.appendChild(newDivCol);
@@ -77,7 +129,6 @@
     </script>
 
 
-    <form action="/" class="form-signin" method="POST"></form>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
     <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
