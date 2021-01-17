@@ -6,7 +6,9 @@ Agenda:
 A website to allow students with similar majors and courses to meet
 
 Design:
-Home page that explains what the site is about
+*Homepage* 
+Along with telling the users briefly about the website and it's use, the websites lets the user navigate to other pages where they can register, submit inforamtion about their classes, and find other people with similar classes. 
+*Register* 
 Create profile option and page 
 Basic info, nickname
 Classes page (submit your classes)
