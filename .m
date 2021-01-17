@@ -1,0 +1,2 @@
+CLIENT_ID=339383190474-7mphckj4e2cu7cobcfdfkgkb0c3png7r.apps.googleusercontent.com
+CLIENT_SECRET=UeiG7WTnQXvUFTMrUsGyVxnd
