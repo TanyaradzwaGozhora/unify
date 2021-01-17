@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-	<title>HackED 2021</title>
+	<title>Unify</title>
 
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -26,54 +26,54 @@
 <body class="text-center">
 <div class="topnav">
     <a href="/">Home</a>
-    <a class="btn btn-dark btn-lg" href="/logout" role="button">Log out</a>
-    <a class="btn btn-light btn-lg" href="/courses" role="button">Classes</a>
-    <a class ="active" href="/success">Results</a>
+    <a href="/logout" role="button">Log out</a>
+    <a class="active" href="/courses" role="button">Classes</a>
+    <a href="/success">Results</a>
     <b href="#domain">Unify</b>
 </div>
+<div class="banner" style="height: 200px">
+    <a>Add your courses and contact details.</a>
+</div>
+<div style="padding: 15px;"></div>
+
     <form action="/calculate" class="form-signin" method="POST">
-        <img src="https://edexec.co.uk/wp-content/uploads/2020/01/iStock-1130620580-678x381.jpg" width="700" height="300">
-        <h1 class="h3 mb-3 font-weight-normal">Courses and Contact details</h1>
 
-    <p>Enter your courses in the following format "CMPUT201" (without the "")</p>
-        <p>To get useful results you must enter at least two courses</p>
-
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating">
 
-                <label>
+                <label style="color: white">
                     Preferred Name
-                    <input name="pname" type="text" class="form-control" v-model="act" placeholder="Davie" required>
+                    <input name="pname" type="text" class="form-control" v-model="act" placeholder="E.g: Davie" style="width: 400px" required>
                 </label>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating">
 
-                <label>
+                <label style="color: white">
                     Discord Username
-                    <input type=text" name="discord" class="form-control middle" placeholder="mamomoi#1230" required>
+                    <input type=text" name="discord" class="form-control middle" placeholder="E.g: mamomoi#1230" style="width: 400px" required>
                 </label>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating">
 
-                <label>
+                <label style="color: white">
                     Faculty
-                    <input type="text" name="faculty" class="form-control middle" placeholder="Arts" required>
+                    <input type="text" name="faculty" class="form-control middle" placeholder="E.g: Science" style="width: 400px" required>
                 </label>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating">
 
-                <label>
+                <label style="color: white">
                     Major
-                    <input type="text" name="major" class="form-control middle" placeholder="Economics" required>
+                    <input type="text" name="major" class="form-control middle" placeholder="E.g: Computer Science" style="width: 400px" required>
                 </label>
             </div>
         </div>
@@ -82,40 +82,41 @@
 
 
     <div class="row" id="addRowsHere">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating">
 
-                <label>
+                <label style="color: white">
                     Course
-                    <input name="1" type="text" class="form-control" placeholder="ECON101" v-model="act" required>
+                    <input name="1" type="text" class="form-control" placeholder="E.g: CMPUT201" v-model="act" style="width: 400px" required>
                 </label>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="form-group label-floating ">
-                <label class="control-label">Course
-                <input name="2" type="text" class="form-control" placeholder="ECON101" v-model="section" required>
+                <label class="control-label" style="color: white">Course
+                <input name="2" type="text" class="form-control" placeholder="E.g: ECON101" v-model="section" style="width: 400px" required>
                 </label>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row clearfix">
-    <div class="col-md-8 col-md-offset-1 column">
-    <button type="button" class="btn btn-default" id="clickMe">Add row</button>
+    <div class="col-md-12">
+    <button type="button" class="btn btn-default" id="clickMe">Add course</button>
     </div> </div> </div>
     <script>
         document.getElementById("clickMe").onclick = function() {
             //first div
             var newDivCol = document.createElement("div");
-            newDivCol.setAttribute("class", "col-md-8 col-md-offset-2 column");
+            newDivCol.setAttribute("class", "col-md-12");
             //second div
             var newDivForm = document.createElement("div");
             newDivForm.setAttribute("class", "form-group label-floating");
             newDivCol.appendChild(newDivForm);
             //label
-            var newlabel = document.createElement("h3");
-            newlabel.setAttribute("class", "label");
+            var newlabel = document.createElement("label");
+            newlabel.setAttribute("class", "control-label");
+            newlabel.setAttribute("style", "color: white");
             newlabel.innerHTML = "Course";
             newDivForm.appendChild(newlabel);
             //input
@@ -123,9 +124,10 @@
             count_of_courses +=1;
             var newInput = document.createElement("input");
             newInput.setAttribute("type", "text");
+            newInput.setAttribute("style", "width: 400px");
             newInput.setAttribute("class", "form-control");
             newInput.setAttribute("v-model", "act");
-            newInput.setAttribute("placeholder", "ECON101");
+            newInput.setAttribute("placeholder", "E.g: MATH214");
             newInput.setAttribute("name", i);
             newlabel.appendChild(newInput);
 
@@ -135,8 +137,8 @@
     </script>
 
 
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <div style="padding: 10px;"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="background-color: #ffb300">Sign up</button>
     <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
     </form>
 </div> </div> </div>
