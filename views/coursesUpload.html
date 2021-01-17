@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+	<title>HackED 2021</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="homeStyle.css">
+</head>
+<body style="background-color: #212121">
+	<div class="topnav">
+  		<a href="home.html">Home</a>
+  		<a href="register.html">Register</a>
+  		<a class="active" href="coursesUpload.html">Classes</a>
+  		<a href="results.html">Results</a>
+		<b href="#domain">Unify</b>
+	</div>
+	<div class="banner" style="height: 200px">
+		<a>Add your courses.</a>
+    </div>
+    <div style="padding: 15px;"></div>
+
+    <div class="row" id="addRowsHere">
+        <div class="col-md-8 col-md-offset-2 column">
+            <div class="form-group label-floating">
+                <h2 class="label">Course</h2>
+                <input type="text" class="form-control" v-model="act" placeholder="E.g: CMPUT 201">
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2 column">
+            <div class="form-group label-floating ">
+                <h2 class="label">Course</h2>
+                <input type="text" class="form-control" v-model="section" placeholder="E.g: CMPUT 201">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-8 column">
+            <button type="button" class="btn btn-default" id="clickMe" style="margin-left: 63px; float: left">Add row</button>
+            </div> </div> </div>
+    <script>
+        document.getElementById("clickMe").onclick = function() {
+            //first div
+            var newDivCol = document.createElement("div");
+            newDivCol.setAttribute("class", "col-md-8 col-md-offset-2 column");
+            //second div
+            var newDivForm = document.createElement("div");
+            newDivForm.setAttribute("class", "form-group label-floating");
+            newDivCol.appendChild(newDivForm);
+            //label
+            var newlabel = document.createElement("h2");
+            newlabel.setAttribute("class", "label");
+            newlabel.innerHTML = "Course";
+            newDivForm.appendChild(newlabel);
+            //input
+            var newInput = document.createElement("input");
+            newInput.setAttribute("type", "text");
+            newInput.setAttribute("class", "form-control");
+            newInput.setAttribute("v-model", "act");
+            newInput.setAttribute("placeholder", "E.g: CMPUT 201")
+            newDivForm.appendChild(newInput);
+            var element = document.getElementById("addRowsHere");
+            element.appendChild(newDivCol);
+        };
+    </script>
+
+<div style="padding: 15px;"></div>
+<div class="container">
+    <div class="row clearfix">
+<div class="col-md-8 col-md-offset-2 column">
+    <form action="/" class="form-signin" method="POST"></form>
+
+    <a href="results.html" class="btn btn-lg btn-warning btn-block" role="button" aria-pressed="true">Add Courses</a>
+    <p class="mt-5 mb-3 text-muted">&copy; Unify 2021</p>
+</div> </div> </div>
+    </body>
+</html>
