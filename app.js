@@ -16,26 +16,30 @@ var courses = [];
 var currentUser ={};
 
 
-
+//setting our view engine
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+//session creation using ejs
 app.use(session({
   secret: "Our little secret.",
   resave: false,
   saveUninitialized: false
 }));
 
+
+//commence using passpirt for the sake of Oauth
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Connect to our mongoose database and allow creation of index for our documents
 mongoose.connect("mongodb://localhost:27017/unify", {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
 
-//pname = preferred name
+//Our UserSchema
 const userSchema = new mongoose.Schema ({
   username: String,
   googleId: String,
@@ -46,11 +50,14 @@ const userSchema = new mongoose.Schema ({
   Major: String
 });
 
+//Calling on Mongoose
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
+//Create this user model based on the previous schema
 const User = new mongoose.model("User", userSchema);
 
+//for use of passport oauth
 passport.use(User.createStrategy());
 
 passport.serializeUser(function(user, done) {
@@ -187,111 +194,61 @@ app.post("/register", function(req, res){
 });
 
 
-// app.post("/login", function(req, res){
-//
-//   const user = new User({
-//     preferredName: req.body.preferred,
-//     discordName: req.body.discord
-//   });
-//
-//   req.login(user, function(err){
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       passport.authenticate("local")(req, res, function(){
-//         res.redirect("/secrets");
-//       });
-//     }
-//   });
-//
-// });
 
+//the route for the form on it's submission
 app.post("/calculate", function(req, res){
+
   //add each element in courses (all integers)
   let chosenCourses = [];
   var data = req.body;
   console.log(data);
-  for( let prop in data ){
-    if(!(isNaN(parseInt(prop)))){
-      chosenCourses.push(data[prop]);
+
+  //pushing our course on to our list of chosen courses
+  for( let prop in data ){//for each key our "dictionary" of information sent over
+    if(!(isNaN(parseInt(prop)))){//if the key is an integer (as all our courses have integer keys)
+      chosenCourses.push(data[prop]);//push this with it's key to the list of courses
     }
   }
 
+
+  //adding the user to our database
   var newvalues = {$set: {preferredName: req.body.pname, discordName:req.body.discord, courses: chosenCourses} };
   User.updateOne({ googleId: currentUser.id }, newvalues, function(err, foundUser){
     console.log(foundUser.discordName);
   });
-  matches(chosenCourses);
-  res.redirect("/success");
+
+  matches(chosenCourses);//check who our user matches
+
+
+  res.redirect("/success");// send over to success route
 });
 
 function matches(courses){
-  // def most_frequent(List):
-  // return max(set(List), key = List.count)
-  //
-  //
+
+  //Format of our data
   // currentUser = { "_id" : ObjectId("60043b353f988b4cc03e9439"), "courses" : [ "ECON101", "ECON281", "ECON282" ], "googleId" : "102824134670291232843", "__v" : 0, "discordName" : "Cosmic#7938", "preferredName" : "Akrash" }
   // courses = currentUser["courses"]
-  //
-  // var final_result = []
-  var final_result = [];
-  var results = [];
-  // var users = Object.values(User.find({}));
-  // for course in courses:
-  // result = collection.find({"courses":{"$in":[course]}})
-  // result = list(result)
 
-  User.find({}, function(err, foundUser){
-    if (err) {
-      console.log(err);
-    }
-    else
-    {
-      console.log(foundUser);
-      courses.forEach(course =>
-          {
-            for(i = 0; i < foundUser.length; i++)
-            {
-
-              for (var key in foundUser[i]) {
-                // check if the property/key is defined in the object itself, not in parent
-                if (foundUser[i].hasOwnProperty(key)) {
-                  console.log(key, foundUser[i][key]);
-                }
-              }
-            //     if (foundUser[i].courses.includes(course)) {
-            //       results.push(foundUser[i].discordName)
-            // }
-
-            }
+  //results will be stored in two dictionaries one called results and another final_results
+  //ideas:
+  //Not too pragmatic - 1 ~ Sort on input(dont see any harm there)
+  //Check if we have a counter object in javascript, later
+  //2-  results = {}
+  //    for each course in courses{
+  //      find all students with said course, for each of them
+  //      if dict[student]:
+  //          dict[student]+=1
+  //      else:
+  //          dict[student] = 1
+  //    }
 
 
 
-          }
-      )
-    }
-
-  });
 
 
+  //Store data in format, maybe later on we
+  //{1(Number of matches): [Students], 2(""): [Students]}
 
-  // for item in result:
-  // final_result.append(item["discordName"])
-  //
-  results.forEach(person =>
-  {
-      final_result.push(person);
-      console.log(final_result);
-  }
-  );
-  // for i in range(5):
-  // item = most_frequent(final_result)
-  // print(item)
-  // for name in final_result:
-  // if name == item:
-  // final_result.remove(name)
-  //
-  // #port number: 27017
 }
 
 function isLoggedIn(req, res, next){
