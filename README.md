@@ -27,7 +27,7 @@ This page shows other students who are in two or more similar courses. The user 
 
 Locally :
 
-Run npm install after download
+Run npm install directly after download
 
 
 Run nodemon app.js
