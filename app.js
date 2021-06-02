@@ -36,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Connect to our mongoose database and allow creation of index for our documents
-mongoose.connect("mongodb://localhost:27017/unify", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/unify", {useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set("useCreateIndex", true);
 
 //Our UserSchema
@@ -231,8 +231,8 @@ function matches(courses){
 
   //results will be stored in two dictionaries one called results and another final_results
   //ideas:
-  //Not too pragmatic - 1 ~ Sort on input(dont see any harm there)
-  //Check if we have a counter object in javascript, later
+  //Not too pragmatic - 1 ~ Sort on input(dont see any harm there) *not for now*
+  //Check if we have a counter object in javascript, later *not for now*
   //2-  results = {}
   //    for each course in courses{
   //      find all students with said course, for each of them
@@ -242,14 +242,38 @@ function matches(courses){
   //          dict[student] = 1
   //    }
 
+  results = {}
+  courses.forEach(function(course){
+    findMatchingStudents(course, results)
+  });
 
 
 
-
+  // print(results);//just checking if it's working
   //Store data in format, maybe later on we
   //{1(Number of matches): [Students], 2(""): [Students]}
+}
+
+function findMatchingStudents(course, results){
+  //find all students with said course first
+  User.find({courses: course}, function(err,docs){
+    console.log(course);
+    docs.forEach(function(doc){
+      console.log(doc.googleId);
+      //to be debugged (creating results)
+      // if (results.hasOwnProperty(doc.googleId)){
+      //   results[doc.googleId] ++;
+      // }
+      // else{
+      //   results[doc.googleId] = 1;
+      // }
+
+    })
+  });
 
 }
+
+
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
