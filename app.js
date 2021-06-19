@@ -225,27 +225,14 @@ app.post("/calculate", function(req, res){
 
 function matches(courses){
 
-  //Format of our data
-  // currentUser = { "_id" : ObjectId("60043b353f988b4cc03e9439"), "courses" : [ "ECON101", "ECON281", "ECON282" ], "googleId" : "102824134670291232843", "__v" : 0, "discordName" : "Cosmic#7938", "preferredName" : "Akrash" }
-  // courses = currentUser["courses"]
+  // Goals:
+  // Display Name and discord handle
 
-  //results will be stored in two dictionaries one called results and another final_results
-  //ideas:
-  //Not too pragmatic - 1 ~ Sort on input(dont see any harm there) *not for now*
-  //Check if we have a counter object in javascript, later *not for now*
-  //2-  results = {}
-  //    for each course in courses{
-  //      find all students with said course, for each of them
-  //      if dict[student]:
-  //          dict[student]+=1
-  //      else:
-  //          dict[student] = 1
-  //    }
-
-  results = {}
+  var results = new Object();
   courses.forEach(function(course){
     findMatchingStudents(course, results)
   });
+
 
 
 
@@ -258,17 +245,63 @@ function findMatchingStudents(course, results){
   //find all students with said course first
   User.find({courses: course}, function(err,docs){
     console.log(course);
-    docs.forEach(function(doc){
-      console.log(doc.googleId);
-      //to be debugged (creating results)
-      // if (results.hasOwnProperty(doc.googleId)){
-      //   results[doc.googleId] ++;
-      // }
-      // else{
-      //   results[doc.googleId] = 1;
-      // }
+    let supremum = 0;
 
+    //get the count for each student
+    docs.forEach(function(doc){
+      var key = doc.googleId;
+
+      if (key in results)
+      {
+       results[key] = results[key] + 1;
+
+      }
+      else{
+        results[key] = 1;
+      }
+      if(results[key]>supremum)
+      {
+        supremum = results[key];
+      }
     })
+
+
+    console.log(JSON.stringify(results), supremum);
+    var fResults = new Object();
+    for(var i in results) {
+      var x = results[i];
+      if (x in fResults){
+        fResults[x].push(i)
+      }
+      else{
+        fResults[x] = [i];
+      }
+    }
+
+    var sortable = [];
+    for (var i in fResults){
+      sortable.push([i, fResults[i]]);
+    }
+
+    sortable.sort(function(a,b){
+      return b[0] - a[0];
+    });
+
+    console.log(sortable);
+
+    var simple_array = [];
+    var i = 0
+    while(i < sortable.length){
+      for (var j = 0; j < sortable[i][1].length; j++)
+      {
+        simple_array.push(sortable[i][1][j]);
+      }
+      i++;
+    }
+
+    console.log(simple_array);
+
+
   });
 
 }
