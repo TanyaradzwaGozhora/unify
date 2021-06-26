@@ -306,9 +306,11 @@ function findMatchingStudents(course, results){
         {
           User.findOne({googleId: user}, function(err, result)
           {
-            if (err) {throw err}
+            console.log(result);
+            var res = result.discordName;
+            if (err) {console.log(err)}
             else{
-              final_result.append(result.discordName);
+              final_result.push(res);
             }
 
 
