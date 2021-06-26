@@ -135,9 +135,9 @@ app.get("/success", isLoggedIn, function(req, res){
     } else {
       if (foundUser) {
         if (foundUser.courses.length === 0) {
-          res.render("success", {results: 'You need to submit classes'});
+          res.render("success.ejs", {results: 'You need to submit classes'});
         } else {
-        res.render("success", {results: 'Congrats here are your matches'});
+        res.render("success.ejs", {results: 'Congrats here are your matches'});
         }
       }
     }
@@ -299,7 +299,24 @@ function findMatchingStudents(course, results){
       i++;
     }
 
-    console.log(simple_array);
+    app.locals.myVar = simple_array;
+    console.log(app.locals.myVar);
+    let final_result = [];
+    simple_array.forEach((user)=>
+        {
+          User.findOne({googleId: user}, function(err, result)
+          {
+            if (err) {throw err}
+            else{
+              final_result.append(result.discordName);
+            }
+
+
+          })
+        }
+    );
+    app.locals.myVar = final_result;
+
 
 
   });
