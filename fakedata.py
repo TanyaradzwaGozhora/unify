@@ -16,10 +16,17 @@ def create_rows():
 
 
 def courses():
-    existing = ['MATH','ECON','CMPUT','STAT','SOC','ASTRO','ENGL','BUS','MUS']
+
+    df = pd.read_excel('Courses.xlsx')
+
+    df.drop_duplicates(inplace=True)
     course_list = []
+    random_courses = df.sample(n=3)
+
+    arr = random_courses.to_numpy()
+
     for i in range(3):
-        course_list.append(str(random.choice(existing) + str(random.randint(100,499))))
+        course_list.append(str(arr[i][0]) + str(arr[i][1]))
     
     return course_list
 
