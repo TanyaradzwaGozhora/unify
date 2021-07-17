@@ -117,7 +117,7 @@ app.get("/signIn", function(req,res){
 });
 
 app.get("/courses", isLoggedIn, function (req, res) {
-  res.render("coursesUpload");
+    res.render("coursesUpload");
 });
 
 
@@ -135,10 +135,14 @@ app.get("/success", isLoggedIn, function(req, res){
     } else {
       if (foundUser) {
         if (foundUser.courses.length === 0) {
-          res.render("success.ejs", {results: 'You need to submit classes'});
-        } else {
-        res.render("success.ejs", {results: 'Congrats here are your matches'});
+          res.render("failure");
         }
+        else{
+          //call matches and initialize locals.myVar for our call to success
+          matches(foundUser.courses);
+          res.render("success");
+        }
+        
       }
     }
   });
@@ -209,6 +213,8 @@ app.post("/calculate", function(req, res){
       chosenCourses.push(data[prop]);//push this with it's key to the list of courses
     }
   }
+
+
 
 
   //adding the user to our database
