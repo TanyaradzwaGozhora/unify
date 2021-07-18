@@ -23,7 +23,7 @@ The user can provide the name of the courses taken. Once the user is done, the u
 
 
 **Results**
-This page shows other students who are in two or more similar courses. The user can then contact the matches on discord. 
+This page shows other students who are in any similar courses, in order of similarity. The user can then contact the matches on discord. 
 
 Locally :
 
