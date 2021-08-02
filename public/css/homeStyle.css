@@ -60,3 +60,9 @@ a.btn.btn-block.btn-social.btn-google {
     max-width: 25rem;
     height: 3.5rem;
 }
+
+.cleaner.btn-google {
+    padding: 1rem;
+    border:none;
+    border-radius: 1.5em;
+}
