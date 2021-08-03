@@ -10,10 +10,11 @@
     
     background: #FFFFFF;
     border-radius: 25px;
+}
 
 /* Remove all existing margins and padding */
 
-body {
+body{
     margin: 0 !important;
     padding: 0 !important;
     background-color: #77C9D4
