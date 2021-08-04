@@ -20,6 +20,11 @@ body{
     background-color: #77C9D4
 }
 
+/* h1 things */
+h1 {
+    text-align: center;
+}
+
 
 /* Add a black background color to the top navigation */
 .text{
@@ -120,11 +125,13 @@ a.btn.btn-block.btn-social.btn-google {
 }
 /* Add a color to the active/current link */
 
-.topnav a.active {
+.topnav h1.active {
     background-color: #06343a;
     color: white;
 }
 
-.results{
-    font-size:18px;
+.results {
+    font-size: 18px;
+    text-align: center;
+    color: white;
 }
