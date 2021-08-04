@@ -17,28 +17,36 @@
 
 <body style="background-color: #212121">
     <div class="topnav">
-        <a class="active" href="/">Home</a>
+        <a class="btn-lg active" href="/">Home</a>
         <a class="btn btn-dark btn-lg" href="/logout" role="button">Log out</a>
         <a class="btn btn-light btn-lg" href="/courses" role="button">Classes</a>
-        <a href="/success">Results</a>
-        <b href="#domain">Unify</b>
+        <a class="btn btn-lg" href="/success">Results</a>
+        <a id="title" href="/">Unify</a>
     </div>
     <div class="banner" style="height: 200px">
-        <a>Welcome</a>
+        <div class='col-lg-12'>
+            <h1>Welcome to Unify</h1>
+        </div>
+        <div class='col-lg-12'>
+            <p>We hope you've a lovely time :)</p>
+        </div>
+        
+
     </div>
-    <div style="width: 42%; float: left; height: 100%; background-color: white; margin: 20px; border-radius: 5px; padding: 20px;">
+    <div class="page-container">
+    <div id="card1"class="col-md-6">
         <p style="text-align: center; font-size: 24px"><strong>About this site
 			</strong></p>
-        <p style="font-size: 17px">This site was created to help students at the University of Alberta&nbsp; find fellow students in similar classes as them. Students can add the classes they are currently taking and are then matched with other students that have 2 or more similar
+        <p style="text-align: center; font-size: 17px">This site was created to help students at the University of Alberta&nbsp; find fellow students in similar classes as them. Students can add the classes they are currently taking and are then matched with other students that have 2 or more similar
             classes as them. Students are then presented a report of all matching students and and their Discord handle.&nbsp;</p>
     </div>
-    <div style="width: 54%; float: right; height: 100%; background-color: white; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; border-radius: 5px; padding: 20px">
+    <div id="card2"class="col-md-6">
         <p style="text-align: center; font-size: 24px">
             <strong>
 				User Manual
 			</strong>
         </p>
-        <p style="font-size: 17px">This process involves 4 easy steps:</p>
+        <p class='manual-text'>This process involves 4 easy steps:</p>
         <figure style="display: inline-block">
             <img src="1.png" width="100" style="margin: 20px; margin-left: 50px;">
             <figcaption style="text-align: center; font-size: 17px; margin-left: 10px">
@@ -64,6 +72,7 @@
             </figcaption>
         </figure>
     </div>
+</div>
 </body>
 
 </html>

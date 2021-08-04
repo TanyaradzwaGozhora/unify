@@ -24,20 +24,23 @@
         <b href="#domain">Unify</b>
     </div>
     <div class="banner" style="height: 200px">
-        <h1>Here are your results</h1>
-
-        
-
-
+        <% if (myVar.length>0){%>
+        <h1>Congrats you have</br>
+        <%=myVar.length%> matches
+        </h1>
 
     </div>
-    <div style="padding: 15px;">
+    <div style="background:#CFEDF1;;padding: 15px;">
         <div class="results">
-            <% myVar.forEach(function(user){ %>
-            <p><%=user%></p>
+            <% myVar.forEach(function(user, i){ %>
+                <% i = i+1 %>
+            <p><%=i%>. <%=user%></p>
             <% }) %>
         </div>
     </div>
+    <%}else{%>
+        <h1>No matches yet, try again later</h1>
+        <%}%>
 </body>
 
 </html>
