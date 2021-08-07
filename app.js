@@ -160,6 +160,10 @@ app.get("/submit", function(req, res){
   }
 });
 
+app.get("/googlec33630683f22f1f8.html", function(req, res){
+  res.render("googlec33630683f22f1f8.html");
+});
+
 app.post("/submit", function(req, res){
   const submittedSecret = req.body.secret;
 
