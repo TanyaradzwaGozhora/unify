@@ -75,7 +75,6 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    //can be change later to google/unify
     callbackURL: "http://localhost:3000/auth/google/unify",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
@@ -359,6 +358,11 @@ function isLoggedIn(req, res, next){
 
 
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000.");
-});
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+ 
+app.listen(port, function() {
+  console.log("Server started succesfully");
+});          

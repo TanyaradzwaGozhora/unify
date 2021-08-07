@@ -1,7 +1,8 @@
 {
-  "name": "Secrets",
+  "name": "Unify",
   "version": "1.0.0",
   "description": "",
+  "start": "node app.js",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.3",
