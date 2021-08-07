@@ -138,9 +138,14 @@ app.get("/success", isLoggedIn, function(req, res){
           res.render("failure");
         }
         else{
+          function success_render(){
+            res.render("success");
+          }
           //call matches and initialize locals.myVar for our call to success
           matches(foundUser.courses);
-          res.render("success");
+          //slight delay to ensure the values have loaded
+          setTimeout(success_render, 1500, 'funky');
+          
         }
         
       }
@@ -223,6 +228,7 @@ app.post("/calculate", function(req, res){
     console.log(foundUser.discordName);
   });
 
+
   matches(chosenCourses);//check who our user matches
 
 
@@ -303,6 +309,16 @@ function findMatchingStudents(course, results){
         simple_array.push(sortable[i][1][j]);
       }
       i++;
+    }
+
+    if (currentUser)
+    {
+      console.log("There is a user");
+    }
+    let index = simple_array.indexOf(currentUser.id);
+
+    if (index > -1) {
+      simple_array.splice(index, 1);
     }
 
     app.locals.myVar = simple_array;
