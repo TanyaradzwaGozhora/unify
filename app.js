@@ -36,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Connect to our mongoose database and allow creation of index for our documents
-mongoose.connect("mongodb://localhost:27017/unify", {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:/unify", {useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set("useCreateIndex", true);
 
 //Our UserSchema
@@ -75,7 +75,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/unify",
+    callbackURL: "https://unify-ed.herokuapp.com/auth/google/unify",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
