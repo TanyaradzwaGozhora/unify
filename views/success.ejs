@@ -17,11 +17,11 @@
 
 <body style="background-color: #212121">
     <div class="topnav">
-        <a href="/">Home</a>
-        <a href="/logout" role="button">Log out</a>
-        <a href="/courses" role="button">Classes</a>
-        <a class="active" href="/success">Results</a>
-        <b href="#domain">Unify</b>
+        <a class="btn-lg btn-light" href="/">Home</a>
+        <a class="btn btn-dark btn-lg" href="/logout" role="button">Log out</a>
+        <a class="btn btn-light btn-lg" href="/courses" role="button">Courses</a>
+        <a class="btn btn-lg active" href="/success">Results</a>
+        <a id="title" href="/">Unify</a>
     </div>
     <div class="banner" style="height: 200px">
         <% if (myVar.length>0){%>
@@ -39,7 +39,8 @@
         </div>
     </div>
     <%}else{%>
-        <h1>No matches yet, try again later</h1>
+        <h1>No matches yet :( <br/>
+            try again later</h1>
         <%}%>
 </body>
 

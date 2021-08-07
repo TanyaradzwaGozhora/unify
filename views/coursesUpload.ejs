@@ -25,28 +25,26 @@
 
 <body class="text-center">
     <div class="topnav">
-        <a href="/">Home</a>
-        <a href="/logout" role="button">Log out</a>
-        <a class="active" href="/courses" role="button">Classes</a>
-        <a href="/success">Results</a>
-        <b href="#domain">Unify</b>
+        <a class="btn btn-light btn-lg" href="/">Home</a>
+        <a class="btn btn-dark btn-lg" href="/logout" role="button">Log out</a>
+        <a class="btn btn-light btn-lg active" href="/courses" role="button">Courses</a>
+        <a class="btn btn-lg" href="/success">Results</a>
+        <a id="title" href="/">Unify</a>
     </div>
     <div class="banner" style="height: 200px">
         <h1>
             Add your courses and contact details
         </h1>
+        
+         
+    </div>
+    <div class="small-banner"style="padding: 15px;">
         <h2>
             Important Note: 
         </h2>
         <p class='warning-text'>
             If you have already submitted classes, this will change your classes and this cannot be reverted
         </p>
-         
-    </div>
-    <div style="padding: 15px;">
-    <p>
-
-    </p>
     </div>
 
     <form action="/calculate" class="form-signin" method="POST">

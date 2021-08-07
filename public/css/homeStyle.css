@@ -83,8 +83,8 @@ h1 {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    font-size: 2rem;
 }
-
 .banner p {
     margin: 4rem;
     /* position: absolute; */
@@ -173,7 +173,7 @@ a.btn.btn-block.btn-social.btn-google {
 .warning-text {
     font-size: 18px;
     padding: 10px;
-    color: aliceblue;
+    color: grey;
 }
 
 .page-container{
