@@ -36,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Connect to our mongoose database and allow creation of index for our documents
-mongoose.connect("mongodb://localhost:/unify", {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin-tanya:4BMaStNKsmNVS9Z@cluster0.mrozz.mongodb.net/unify", {useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set("useCreateIndex", true);
 
 //Our UserSchema
@@ -101,6 +101,8 @@ app.get("/auth/google/unify",
     // Successful authentication, redirect to secrets.
     res.redirect("/");
   });
+
+
 
 app.get("/login", isLoggedIn,function(req, res){
   res.render("login");
